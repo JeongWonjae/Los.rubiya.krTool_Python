@@ -1,25 +1,25 @@
 import hashlib
 
-afterHash="88e065fb59a3c53e523a2a6754a6d89a26f6dcad"
-sha=hashlib.sha1()
+def encodingRepeat(string):
+    str=string
+    result=hashlib.sha1(str.encode("utf-8"))
+
+    for i in range(0, 499):
+        result=hashlib.sha1(result.hexdigest().encode("utf-8"))
+        #print(result.hexdigest())
+
+    return result.hexdigest()
 
 def getHash(start, end):
-    file = open("rainbowTable.txt", "w")
+    file = open("rainbowTable2.txt", "w")
 
     for index in range(start, end):
-        beforeHash = (str(index) + "salt_for_you").encode("utf-8")
+        result=encodingRepeat(str(index)+"salt_for_you")
 
-        for i in range(0, 500):
-            sha.update(beforeHash)
-
-        file.write(str(index)+"->"+sha.hexdigest()+"\n")
-        print("(+) ", beforeHash.decode("utf-8"), " -> ", sha.hexdigest())
-
-        if (sha.hexdigest() == afterHash):
-            print("(+) Find!")
-            break
+        file.write(str(index) + "salt_for_you -> " + result + "\n")
+        print(str(index)+" = "+result)
 
     file.close()
 
 #__main__
-getHash(40000000, 50000000)
+getHash(30000001, 60000000)
